@@ -32,5 +32,10 @@ addLayer("a", {
             description: "Start Asking Things",
             cost: new Decimal(1),
         },
+        12: {
+            title: "Wonders Of The World",
+            description: "?'s Doubled",
+            cost: new Decimal(3),
+        },
     },
 })
