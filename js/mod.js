@@ -43,10 +43,19 @@ function getPointGen() {
 	let gain = new Decimal(1)
 	if (hasUpgrade('m',11)) gain = gain.times(2)
 	if (hasUpgrade('m',12)) gain = gain.times(4)
+	if (hasUpgrade('m',14)) gain = gain.times(2)
+
 	if (hasUpgrade('h',11)) gain = gain.times(2)
 	if (hasUpgrade('h',12)) gain = gain.times(4)
-	if (hasUpgrade('m', 13)) gain = gain.times(upgradeEffect('m', 13))
-	if (hasUpgrade('h', 13)) gain = gain.times(upgradeEffect('h', 13))
+	if (hasUpgrade('h',14)) gain = gain.times(6)
+
+	if (hasUpgrade('d',11)) gain = gain.times(2)
+	if (hasUpgrade('d',12)) gain = gain.times(4)
+	if (hasUpgrade('d',13)) gain = gain.times(6)
+
+	if (hasUpgrade('m',13)) gain = gain.times(upgradeEffect('m', 13))
+	if (hasUpgrade('h',13)) gain = gain.times(upgradeEffect('h', 13))
+	if (hasUpgrade('d',14)) gain = gain.times(upgradeEffect('d', 14))
 	return gain
 }
 
@@ -58,8 +67,8 @@ function addedPlayerData() { return {
 var displayThings = [
 	"Layer 1 Resets Seconds, Layer 2 Resets Layers 1 And Above, Layer 3 Resets All Above And So On",
 	"1-1 = Layer 1 Upgrade 1",
-	"Current Endgame: None",
-	"From Layer 3 And Down I was Too Lazy To Name Any Upgrades So They Are Upgrade I, Upgrade II Etc.",
+	"Current Endgame: 3-5",
+	"From Layer 3 And Down I was Too Lazy To Name Any Upgrades So They Are Just Basic",
 	"(They Will Be Changed Later)",
 	"For Upgrades That Unlock A New Layer, Dont Buy Them Twice Its Not Worth It"
 
@@ -67,7 +76,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return false
+	return hasUpgrade('d',15)
 }
 
 

@@ -42,15 +42,21 @@ addLayer("m", {
         },
         13: {
             title: "'I'm Getting Used To This'",
-            description: "Unspent Minutes Boost Time Gain By A Small Amount",
+            description: "Unspent Minutes Boost Time Gain",
             effect() {
-            return player[this.layer].points.add(1).pow(0.2)
+            return player[this.layer].points.add(1).pow(0.8)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
             cost: new Decimal(10),
 
         },
         14: {
+            title: "Hour Almost Over",
+            description: "2x Time Gain",
+            cost: new Decimal(30),
+
+        },
+        15: {
             title: "1/24th Of A Day",
             description: "Unlock Hours",
             cost: new Decimal(60),
@@ -85,7 +91,7 @@ addLayer("h", {
         return new Decimal(1)
     },
 
-    layerShown() { return hasUpgrade('m',14) || player.h.unlocked},          // Returns a bool for if this layer's node should be visible in the tree.
+    layerShown() { return hasUpgrade('m',15) || player.h.unlocked},          // Returns a bool for if this layer's node should be visible in the tree.
 
     upgrades: {
         11: {
@@ -102,15 +108,20 @@ addLayer("h", {
         },
         13: {
             title: "Almost There",
-            description: "Just A Bit Longer, Hours Boost Second Gain By A Very Little Amount",
+            description: "Just A Bit Longer, Hours Boost Second Gain",
             effect() {
-            return player[this.layer].points.add(1).pow(0.1)
+            return player[this.layer].points.add(1).pow(0.7)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
             cost: new Decimal(8),
 
         },
         14: {
+            title: "Extra Help",
+            description: "Extra Help For Whats To Come, 6x Time Gain",
+            cost: new Decimal(15),
+        },
+        15: {
             title: "Last Stretch(If You Dont Already Have A Ton)",
             description: "Unlock Days",
             cost: new Decimal(24),
@@ -145,9 +156,37 @@ addLayer("d", {
         return new Decimal(1)
     },
 
-    layerShown() { return hasUpgrade('h',14) || player.d.unlocked },          // Returns a bool for if this layer's node should be visible in the tree.
+    layerShown() { return hasUpgrade('h',15) || player.d.unlocked },          // Returns a bool for if this layer's node should be visible in the tree.
 
     upgrades: {
-        // Look in the upgrades docs to see what goes here!
+        11: {
+            title: "Upgrade I",
+            description: "2x Time Gain(Repetative I Know)",
+            cost: new Decimal(1),
+        },
+        12: {
+            title: "Upgrade II",
+            description: "4x Time Gain",
+            cost: new Decimal(3),
+        },
+        13: {
+            title: "Upgrade III",
+            description: "6x Time Gain",
+            cost: new Decimal(3),
+        },
+        14: {
+            title: "Upgrade IV",
+            description: "Days Boost Time Barely",
+            effect() {
+            return player[this.layer].points.add(1).pow(0.6)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            cost: new Decimal(15),
+        },
+        15: {
+            title: "Final Upgrade",
+            description: "Unlock Months",
+            cost: new Decimal(30),
+        },
     },
 })
