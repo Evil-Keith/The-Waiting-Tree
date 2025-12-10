@@ -117,11 +117,6 @@ addLayer("h", {
 
         },
         14: {
-            title: "Extra Help",
-            description: "Extra Help For Whats To Come, 6x Time Gain",
-            cost: new Decimal(15),
-        },
-        15: {
             title: "Last Stretch(If You Dont Already Have A Ton)",
             description: "Unlock Days",
             cost: new Decimal(24),
@@ -156,7 +151,7 @@ addLayer("d", {
         return new Decimal(1)
     },
 
-    layerShown() { return hasUpgrade('h',15) || player.d.unlocked },          // Returns a bool for if this layer's node should be visible in the tree.
+    layerShown() { return hasUpgrade('h',14) || player.d.unlocked },          // Returns a bool for if this layer's node should be visible in the tree.
 
     upgrades: {
         11: {
@@ -170,23 +165,55 @@ addLayer("d", {
             cost: new Decimal(3),
         },
         13: {
-            title: "Upgrade III",
-            description: "6x Time Gain",
-            cost: new Decimal(3),
-        },
-        14: {
             title: "Upgrade IV",
-            description: "Days Boost Time Barely",
+            description: "Days Boost Time",
             effect() {
             return player[this.layer].points.add(1).pow(0.6)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
             cost: new Decimal(15),
         },
-        15: {
+        14: {
             title: "Final Upgrade",
             description: "Unlock Months",
             cost: new Decimal(30),
+        },
+    },
+})
+
+addLayer("M", {
+    startData() { return {                  // startData is a function that returns default data for a layer. 
+        unlocked: false,                     // You can add more variables here to add them to your layer.
+        points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
+    }},
+
+    color: "#1316dcff",                       // The color for this layer, which affects many elements.
+    resource: "Months",            // The name of this layer's main prestige resource.
+    row: 3,                                 // The row this layer is on (0 is the first row).
+
+    baseResource: "Days",                 // The name of the resource your prestige gain is based on.
+    baseAmount() { return player.d.points },  // A function to return the current amount of baseResource.
+
+    requires: new Decimal(30),              // The amount of the base needed to  gain 1 of the prestige currency.
+                                            // Also the amount required to unlock the layer.
+
+    type: "normal",                         // Determines the formula used for calculating prestige currency.
+    exponent: 1,                          // "normal" prestige gain is (currency^exponent).
+
+    gainMult() {                            // Returns your multiplier to your gain of the prestige resource.
+        return new Decimal(1)               // Factor in any bonuses multiplying gain here.
+    },
+    gainExp() {                             // Returns the exponent to your gain of the prestige resource.
+        return new Decimal(1)
+    },
+
+    layerShown() { return hasUpgrade('d',14) || player.M.unlocked},          // Returns a bool for if this layer's node should be visible in the tree.
+
+    upgrades: {
+        11: {
+            title: "Upgrade I",
+            description: "2x Time Gain",
+            cost: new Decimal(1),
         },
     },
 })

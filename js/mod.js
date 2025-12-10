@@ -12,8 +12,8 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1",
-	name: "The Start",
+	num: "0.3",
+	name: "Days",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
@@ -47,15 +47,15 @@ function getPointGen() {
 
 	if (hasUpgrade('h',11)) gain = gain.times(2)
 	if (hasUpgrade('h',12)) gain = gain.times(4)
-	if (hasUpgrade('h',14)) gain = gain.times(6)
 
 	if (hasUpgrade('d',11)) gain = gain.times(2)
 	if (hasUpgrade('d',12)) gain = gain.times(4)
-	if (hasUpgrade('d',13)) gain = gain.times(6)
+
+	if (hasUpgrade('M',11)) gain = gain.times(2)
 
 	if (hasUpgrade('m',13)) gain = gain.times(upgradeEffect('m', 13))
 	if (hasUpgrade('h',13)) gain = gain.times(upgradeEffect('h', 13))
-	if (hasUpgrade('d',14)) gain = gain.times(upgradeEffect('d', 14))
+	if (hasUpgrade('d',14)) gain = gain.times(upgradeEffect('d', 13))
 	return gain
 }
 
@@ -65,9 +65,10 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
+	"This Gets Crazy VERY FAST(By Days Of Course)",
 	"Layer 1 Resets Seconds, Layer 2 Resets Layers 1 And Above, Layer 3 Resets All Above And So On",
 	"1-1 = Layer 1 Upgrade 1",
-	"Current Endgame: 3-5",
+	"Current Endgame: 3-4",
 	"From Layer 3 And Down I was Too Lazy To Name Any Upgrades So They Are Just Basic",
 	"(They Will Be Changed Later)",
 	"For Upgrades That Unlock A New Layer, Dont Buy Them Twice Its Not Worth It"
@@ -76,7 +77,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return hasUpgrade('d',15)
+	return hasUpgrade('M',11)
 }
 
 
